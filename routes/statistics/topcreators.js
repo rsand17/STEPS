@@ -1,11 +1,12 @@
 const express = require("express");
 const postModel = require("../../models/postsSchema");
+const topUsersModel = require("../../models/topUsersSchema");
 const app = express();
 
 app.get("/statistics/topcreators", async (req, res) => {
-  const count = await postModel.countDocuments({user: req.query.user});
+  const users = await topUsersModel.find({}).sort({count: -1}).limit(10);
   const response = {
-    "count": count
+    "users": users
   }
 
   try {
