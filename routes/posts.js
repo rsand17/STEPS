@@ -1,25 +1,25 @@
 const express = require("express");
-const postModel = require("../models/postsDAO");
+const postModel = require("../models/postsSchema");
 const app = express();
 
-app.post("/posts", async (request, response) => {
-    const post = new postModel(request.body);
+app.post("/posts", async (req, res) => {
+  const post = new postModel(req.body);
 
-    try {
-      await post.save();
-      response.send(post);
-    } catch (error) {
-      response.status(500).send(error);
-    }
+  try {
+    await post.save();
+    res.send(post);
+  } catch (error) {
+    res.status(500);
+  }
 });
 
-app.get("/posts", async (request, response) => {
+app.get("/posts", async (req, res) => {
   const posts = await postModel.find({});
 
   try {
-    response.send(posts);
+    res.send(posts);
   } catch (error) {
-    response.status(500).send(error);
+    res.status(500);
   }
 });
 
