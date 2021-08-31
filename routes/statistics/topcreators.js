@@ -2,6 +2,10 @@ const express = require("express");
 const topUsersModel = require("../../models/topUsersSchema");
 const app = express();
 
+/*
+*   get the top 10 of post creators
+*/
+
 app.get("/statistics/topcreators", async (req, res) => {
 
   try {

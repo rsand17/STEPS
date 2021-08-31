@@ -2,6 +2,10 @@ const express = require("express");
 const postModel = require("../models/postsSchema");
 const app = express();
 
+/*
+*   get the total posts number
+*/
+
 app.get("/postsnumber", async (req, res) => {
 
   try {
