@@ -1,5 +1,4 @@
 const express = require("express");
-const postModel = require("../../models/postsSchema");
 const topUsersModel = require("../../models/topUsersSchema");
 const app = express();
 

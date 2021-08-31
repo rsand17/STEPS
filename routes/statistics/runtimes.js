@@ -1,14 +1,18 @@
 const express = require("express");
-const postModel = require("../../models/postsSchema");
+const runtimeModel = require("../../models/runtimesSchema");
 const app = express();
 
 app.get("/statistics/runtimes", async (req, res) => {
-  const count = await postModel.countDocuments({user: req.query.user});
-  const response = {
-    "count": count
-  }
 
   try {
+    const response = await runtimeModel.aggregate([{
+         $group:
+            {
+              _id: "$function",
+              avgRuntime: { $avg: "$runtime" }
+            }
+    }]);
+
     res.json(response);
   } catch (error) {
     res.sendStatus(500);
