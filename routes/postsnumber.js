@@ -3,15 +3,19 @@ const postModel = require("../models/postsSchema");
 const app = express();
 
 app.get("/postsnumber", async (req, res) => {
-  const count = await postModel.countDocuments({});
-  const response = {
-    "count": count
-  }
 
   try {
+    const count = await postModel.countDocuments({});
+    const response = {
+      "postCount": count
+    }
+
     res.json(response);
   } catch (error) {
-    res.sendStatus(500);
+    return res.status(500).json({
+      status:'failure',
+      error: error.message
+    })
   }
 });
 

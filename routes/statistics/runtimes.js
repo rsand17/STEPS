@@ -15,7 +15,10 @@ app.get("/statistics/runtimes", async (req, res) => {
 
     res.json(response);
   } catch (error) {
-    res.sendStatus(500);
+    return res.status(500).json({
+      status:'failure',
+      error: error.message
+    })
   }
 });
 
